@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body style="
+        display: flex;
+        justify-content:center">
+        <style>
+            h1 {
+                left: auto;
+            }
+            label {
+                display: block;
+                font: 1rem 'Fira Sans', sans-serif;
+            }
+
+            input, label {
+                margin: .4rem 0;
+            }
+            .spread {
+                width: 100%;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .canvas{
+                width: 50%;
+                padding: 15px;
+                padding-bottom: 25px;
+                box-shadow: 0px 0px 24px 6px rgba(65, 63, 63, 0.349);
+                position: absolute;
+                background-color: #ffffff;
+                min-width: 350px;
+            }
+
+            .image {
+                width: 100%;
+            }
+        </style>
+        <div class="canvas">
+        <center> <h1>Apple Leaf Disease Classifier</h1></center>
+            <div>
+                {% if result is defined %}
+                <img id='outimg' class="image" src="static/temp.png" alt="your image"
+                    style="display: block;"
+                />
+                {% else %}
+                <img id='outimg' class="image" src="static/placeholder.png" alt="your image" />
+                {% endif %}
+            </div>
+            
+            <label for="avatar" style="padding-top: 5px;">Choose a picture:</label>
+            <div class="spread">
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <input
+                        accept="image/*" 
+                        class="form-control"
+                        onchange="loadFile(event);" 
+                        type="file" 
+                        name="imgFile" 
+                        id="image"
+                    />
+                    <button type="submit" class="btn" 
+                        style="
+                        float: right;
+                        "> Submit 
+                    </button>
+                </form>
+
+            <!-- Result Section-->
+            </div>
+            {% if result is defined %}
+                {% for k in result %}
+                    <div style="padding-top: 24px;"><b>{{k}}</b> - {{result[k]}}%
+                        <div style="
+                            margin-top:5px;
+                            width: 100%;
+                            height: 20px;
+                            background-color:lightgray">
+                            <div style="
+                                left:0px;
+                                background-color:grey;
+                                height:100%; 
+                                width: {{[result[k] | int,1] | max}}%">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <!-- Update the placeholder image with Uploaded image -->
+        <script>
+            var loadFile = function(event) {
+            var image = document.getElementById('outimg');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+        </script>
+        
+    </body>
+</html>

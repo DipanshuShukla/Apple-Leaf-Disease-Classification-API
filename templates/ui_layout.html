@@ -28,22 +28,28 @@
             }
 
             .canvas{
-                width: 50%;
+                width: 100%;
+                max-width: 650px;
                 padding: 15px;
                 padding-bottom: 25px;
                 box-shadow: 0px 0px 24px 6px rgba(65, 63, 63, 0.349);
                 position: absolute;
                 background-color: #ffffff;
-                min-width: 350px;
+            }
+
+            .img-bg{
+                max-height: 600px ;
             }
 
             .image {
                 width: 100%;
+                height: 100%;
+                max-height: 600px
             }
         </style>
         <div class="canvas">
         <center> <h1>Apple Leaf Disease Classifier</h1></center>
-            <div>
+            <div class="img-bg">
                 {% if result is defined %}
                 <img id='outimg' class="image" src="static/temp.png" alt="your image"
                     style="display: block;"
@@ -67,7 +73,9 @@
                     <button type="submit" class="btn" 
                         style="
                         float: right;
-                        "> Submit 
+                        "
+                        id="submit-btn"
+                        disabled = 'true'> Submit 
                     </button>
                 </form>
 
@@ -98,7 +106,8 @@
             var loadFile = function(event) {
             var image = document.getElementById('outimg');
             image.src = URL.createObjectURL(event.target.files[0]);
-        }
+            document.getElementById('submit-btn').disabled = false;
+            }
         </script>
         
     </body>

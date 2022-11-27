@@ -46,3 +46,8 @@ async def UI_endpoint(request: Request,imgFile: UploadFile = File(...)):
 async def classification_endpoint(imgFile: UploadFile):
     contents = await imgFile.read()
     return classify(contents)
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("api_runner:app", host="0.0.0.0", port=8000, reload=True)

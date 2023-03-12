@@ -47,7 +47,36 @@ async def classification_endpoint(imgFile: UploadFile):
     contents = await imgFile.read()
     return classify(contents)
 
+from gunicorn.app.base import BaseApplication
+from uvicorn.workers import UvicornWorker
+
+class GunicornApp(BaseApplication):
+    def __init__(self, app, options=None):
+        self.options = options or {}
+        self.application = app
+        super().__init__()
+
+    def load_config(self):
+        for key, value in self.options.items():
+            if key in self.cfg.settings and value is not None:
+                self.cfg.set(key.lower(), value)
+
+    def load(self):
+        return self.application
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("api_runner:app", host="0.0.0.0", port=8000, reload=True)
+    from api_runner import app
+
+    options = {
+        "bind": "0.0.0.0:8000",
+        "workers": 2,
+        "reload": True,
+        "worker_class": "uvicorn.workers.UvicornWorker",
+    }
+
+    GunicornApp(app, options).run()
+
+
+#if __name__ == "__main__":
+ #   import uvicorn
+  #  uvicorn.run("api_runner:app", host="0.0.0.0", port=8000, reload=True)

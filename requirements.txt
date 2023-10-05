@@ -5,5 +5,5 @@ numpy
 opencv-python
 python-multipart
 starlette
-tesnsorflow=='2.10.0'
+tensorflow
 typing

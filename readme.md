@@ -51,8 +51,8 @@ You can test the API using a web-based user interface (UI) by visiting the follo
 
 The UI allows you to upload images and view classification results. Below are screenshots of the UI:
 <p align="center">
-<img src = "screenshots/screenshot1.PNG">
-<img src = "screenshots/screenshot1.PNG">
+<img src = "screenshots/screenshot1.png" width=48%>
+<img src = "screenshots/screenshot2.png" width=48%>
 </p>
 
 ## Contributing

@@ -49,7 +49,11 @@ You can test the API using a web-based user interface (UI) by visiting the follo
 
 **Test UI URL:** `http://127.0.0.1:8000`
 
-The UI allows you to upload images and view classification results.
+The UI allows you to upload images and view classification results. Below are screenshots of the UI:
+<p align="center">
+<img src = "screenshots/screenshot1.PNG">
+<img src = "screenshots/screenshot1.PNG">
+</p>
 
 ## Contributing
 Contributions to this project are welcome! Please follow the standard GitHub fork and pull request workflow.
